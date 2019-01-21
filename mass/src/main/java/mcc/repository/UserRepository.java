@@ -1,22 +1,13 @@
 package mcc.repository;
 
-import lombok.NoArgsConstructor;
 import mcc.domain.User;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
-    List<User> userList = new ArrayList<>();
+    List<User> findAll();
 
-    public void addUser(String name, String lastName, String role, String mail, String password) {
-        userList.add(new User(name, lastName, role, mail, password));
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
 }

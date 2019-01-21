@@ -2,15 +2,15 @@ package mcc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mcc.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 
 @Entity(name="USERS")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -32,11 +32,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User(String name, String lastName, String role, String mail, String password) {
-        this.name = name;
-        this.lastName = lastName;
-        this.role = role;
-        this.mail = mail;
-        this.password = password;
-    }
+
 }
+
