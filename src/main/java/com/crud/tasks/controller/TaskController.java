@@ -32,9 +32,9 @@ public class TaskController {
         return new TaskDto(1L, "test title", "test_content");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
-    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
-        dbService.deleteTask(dbService.findById(taskId).orElseThrow(TaskNotFoundException::new));
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTaskById")
+    public void deleteTaskById(@RequestParam Long taskId){
+        dbService.deleteById(taskId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
