@@ -32,7 +32,7 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTaskById/{taskId}")
-    public void deleteTaskById(@RequestParam Long taskId){
+    public void deleteTaskById(@PathVariable("id") Long taskId){
         dbService.deleteById(taskId);
     }
 
