@@ -31,7 +31,7 @@ public class TaskController {
         return new TaskDto(1L, "test title", "test_content");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTaskById")
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTaskById/{taskId}")
     public void deleteTaskById(@RequestParam Long taskId){
         dbService.deleteById(taskId);
     }
