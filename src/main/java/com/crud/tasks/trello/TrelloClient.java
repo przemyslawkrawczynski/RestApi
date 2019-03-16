@@ -34,16 +34,13 @@ public class TrelloClient {
     @Value("${trello.app.user}")
     private String trelloUser;
 
-    public Optional<List<TrelloBoardDto>> getTrelloBoards() {
+    public List<TrelloBoardDto> getTrelloBoards() {
 
         URI url = buildTrelloUri();
+        System.out.println("Request url: " + url.toString());
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
 
-        Optional<TrelloBoardDto[]> boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-
-        Optional<List<TrelloBoardDto>> boards =
-
-
-        return Arrays.asList(boardsResponse);
+        return Optional.ofNullable(Arrays.asList(boardsResponse)).orElse(new ArrayList<>());
     }
 
     private URI buildTrelloUri() {

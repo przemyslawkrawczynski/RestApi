@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("v1/trello")
@@ -19,11 +18,10 @@ public class TrelloController {
 
     @GetMapping(value = "getTrelloBoards")
     public void getTrelloBoards() {
-
-
        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-        trelloBoards.stream()
-                .filter(board -> board != null && board.getName() != null && board.getId() != null && board.getName().equals("Kodilla"))
+
+       trelloBoards.stream()
+                .filter(board -> (board != null && board.getName() != null && board.getId() != null && board.getName().contains("Kodilla")))
                 .forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName() ));
     }
 
