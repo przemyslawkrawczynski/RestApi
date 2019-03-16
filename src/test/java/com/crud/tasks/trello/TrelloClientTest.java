@@ -1,6 +1,9 @@
 package com.crud.tasks.trello;
 
+import com.crud.tasks.domain.BadgesDto;
+import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.domain.TrelloCardDto;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,5 +60,34 @@ public class TrelloClientTest {
         Assert.assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
         Assert.assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
         Assert.assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
+    }
+
+    @Test
+    public void shouldCreateCard() throws URISyntaxException {
+        //GIVEN
+        TrelloCardDto trelloCardDto = new TrelloCardDto(
+                "Test task",
+                "Task DEsc",
+                "top",
+                "Test_id"
+        );
+
+        URI uri = new URI("http://test.com/cards?key=testKey&token=testToken&name=Test%20task&desc=Task%20DEsc&pos=top&idList=Test_id");
+
+        CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
+                "1",
+                "Test task",
+                "http://test.com",
+                new BadgesDto()
+        );
+
+        when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        //When
+        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+
+        //Then
+        Assert.assertEquals("1", newCard.getId());
+        Assert.assertEquals("Test task", newCard.getName());
+
     }
 }
