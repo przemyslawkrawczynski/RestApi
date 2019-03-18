@@ -22,6 +22,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class TrelloClientTest {
 
@@ -93,11 +94,14 @@ public class TrelloClientTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void shouldReturnEmptyList() throws URISyntaxException{
         //Given Fake URI
-       when(trelloConfig.getTrelloUser()).thenReturn("FakeUser");
+       //when(trelloConfig.getTrelloUser()).thenReturn("FakeUser");
 
-        //When
+       URI uri = new URI("http://test.com/members/pkrawczynski1/boards?key=testKey&token=testToken&fields=name,id&lists=all");
+       when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(null);
+
+       //When
         int boardSize = trelloClient.getTrelloBoards().size();
 
         //Then

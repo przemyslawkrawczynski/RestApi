@@ -29,7 +29,10 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.16.20")
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-    //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
     compile('org.postgresql:postgresql')
+//    //
+//    compile('io.springfox:springfox-sagger2:2.7.0')
+//    compile('io.springfox:springfox-sagger2:2.7.0')
 
 }
