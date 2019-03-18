@@ -34,6 +34,7 @@ public class TrelloClientTest {
     @Mock
     private TrelloConfig trelloConfig;
 
+
     @Before
     public void init() {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
@@ -89,5 +90,17 @@ public class TrelloClientTest {
         Assert.assertEquals("1", newCard.getId());
         Assert.assertEquals("Test task", newCard.getName());
 
+    }
+
+    @Test
+    public void shouldReturnEmptyList() {
+        //Given Fake URI
+       when(trelloConfig.getTrelloUser()).thenReturn("FakeUser");
+
+        //When
+        int boardSize = trelloClient.getTrelloBoards().size();
+
+        //Then
+        Assert.assertEquals(0, boardSize);
     }
 }
