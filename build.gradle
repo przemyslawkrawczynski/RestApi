@@ -31,8 +31,8 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
     compile('org.postgresql:postgresql')
-//    //
-//    compile('io.springfox:springfox-sagger2:2.7.0')
-//    compile('io.springfox:springfox-sagger2:2.7.0')
+    //
+    compile('io.springfox:springfox-swagger2:2.7.0')
+    compile('io.springfox:springfox-swagger-ui:2.7.0')
 
 }
