@@ -33,7 +33,7 @@ public class SimpleMailServiceTest {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
         if (mail.getToCC() != null) {
-            mailMessage.setTo(mail.getReceiverEail());
+            mailMessage.setCc(mail.getToCC());
         }
 
         mailMessage.setTo(mail.getReceiverEail());
@@ -44,7 +44,7 @@ public class SimpleMailServiceTest {
         SimpleMailMessage mailMessage1 = new SimpleMailMessage();
 
         if (mail.getToCC() != null) {
-            mailMessage1.setTo(mail.getReceiverEail());
+            mailMessage1.setCc(mail.getToCC());
         }
 
         mailMessage1.setSubject(mail.getSubject());
