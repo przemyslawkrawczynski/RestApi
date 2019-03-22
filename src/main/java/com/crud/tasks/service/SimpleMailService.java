@@ -32,6 +32,7 @@ public class SimpleMailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("Przemysław Krawczyński <pk@bluzo.pl>");
         mailMessage.setTo(mail.getReceiverEail());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
