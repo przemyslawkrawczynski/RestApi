@@ -1,10 +1,9 @@
 package com.crud.tasks.trello;
 
 import com.crud.tasks.domain.BadgesDto;
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,16 +75,16 @@ public class TrelloClientTest {
 
         URI uri = new URI("http://test.com/cards?key=testKey&token=testToken&name=Test%20task&desc=Task%20DEsc&pos=top&idList=Test_id");
 
-        CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
+        CreatedTrelloCardDto createdTrelloCard = new CreatedTrelloCardDto(
                 "1",
                 "Test task",
                 "http://test.com",
                 new BadgesDto()
         );
 
-        when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        when(restTemplate.postForObject(uri, null, CreatedTrelloCardDto.class)).thenReturn(createdTrelloCard);
         //When
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
         //Then
         Assert.assertEquals("1", newCard.getId());
@@ -99,7 +98,7 @@ public class TrelloClientTest {
        //when(trelloConfig.getTrelloUser()).thenReturn("FakeUser");
 
        URI uri = new URI("http://test.com/members/pkrawczynski1/boards?key=testKey&token=testToken&fields=name,id&lists=all");
-       when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(null);
+       when(restTemplate.postForObject(uri, null, CreatedTrelloCardDto.class)).thenReturn(null);
 
        //When
         int boardSize = trelloClient.getTrelloBoards().size();
