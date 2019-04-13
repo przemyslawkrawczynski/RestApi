@@ -33,5 +33,6 @@ dependencies {
     compile('org.postgresql:postgresql')
     //
     compile('org.springframework.boot:spring-boot-starter-mail:1.5.7.RELEASE')
+    compile('com.google.code.gson:gson:2.8.2')
 
 }
