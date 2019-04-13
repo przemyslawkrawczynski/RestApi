@@ -1,20 +1,18 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.*;
+import com.crud.tasks.domain.Task;
+import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
-import com.crud.tasks.trello.facade.TrelloFacede;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,8 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -67,7 +66,7 @@ public class TaskControllerTest {
 
 
     @Test
-    public void deleteTaskById() throws Exception{
+    public void deleteTaskById() throws Exception {
         //Given
         doNothing().when(dbService).deleteById(1L);
 
@@ -77,7 +76,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void updateTask()throws Exception{
+    public void updateTask() throws Exception {
         //Given
         TaskDto taskToUpdate = new TaskDto(1L, "Udpdate", "Updating");
         TaskDto taskAfterUpdate = new TaskDto(1L, "Udpdate", "Updated");
@@ -117,7 +116,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void getTaskById() throws Exception{
+    public void getTaskById() throws Exception {
         //Given
         Task foundThisTask = new Task(1L, "task", "found");
 
