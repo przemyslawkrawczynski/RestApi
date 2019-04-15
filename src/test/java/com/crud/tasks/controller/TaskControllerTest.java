@@ -7,6 +7,7 @@ import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,8 +21,7 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -67,12 +67,11 @@ public class TaskControllerTest {
 
     @Test
     public void deleteTaskById() throws Exception {
-        //Given
-        doNothing().when(dbService).deleteById(1L);
-
         //When & Then
         mockMvc.perform(delete("/v1/task/deleteTaskById/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200)); // isOk()
+        dbService.deleteTaskById(1L);
+        Mockito.verify(dbService, times(1)).deleteTaskById(1L);
     }
 
     @Test
@@ -113,6 +112,8 @@ public class TaskControllerTest {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().is(200)); // isOk()
+
+        Mockito.verify(dbService, times(1)).saveTask(taskMapper.mapToTask(createdTask));
     }
 
     @Test
